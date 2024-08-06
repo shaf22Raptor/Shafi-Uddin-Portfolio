@@ -1,38 +1,216 @@
-.App {
-  text-align: center;
+/*Home page */
+
+body {
+  color: white;
+  cursor: default;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body p {
+  opacity: 90%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+a {
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.header{
+  color: white;
+  font-size: 30px;
+  cursor: 'default';
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.main-header {
+  position: absolute;
+  top:15%;
+}
+
+.headers {
+  font-family: "Helvetica";
+  font-size: 60px;
+  letter-spacing: 0.1px;
+  word-spacing: 2px;
+  color: #def3fc;
+  font-weight: 700;
+}
+
+.headers button {
+  background: none;
+  padding:0;
+  border: none;
+  cursor: default;
+  color: inherit;
+  font: inherit;
+}
+
+.headers h2 {
+  border: none;
+  padding: 0;
+  margin: 0;
+  font-size: 25px;
+  font-weight: 100;
+}
+
+.short-description p {
+  color:white;
+  font-size: 20px;
+}
+
+.home_container {
+  position: absolute;
+  text-align: left;
+  justify-content: left;
+  display: grid;
+  grid-template-columns: 35% 65%;
+  margin-left: 17%;
+}
+
+.skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  /* Allows items to wrap onto multiple lines */
+  justify-content: center;
+  /* Center the items horizontally */
+  gap: 15px;
+  /* Add some space between the items */
+  margin-left: 0px;
+}
+
+.skills-list p {
+  font-size: 18px;
+  color: white;
+  background-color: rgba(255, 255, 255, 0.155);
+  padding: 15px;
+  border-radius: 20px;
+  margin: 0.5px;
+  font-weight: bold;
+}
+
+.main {
+  padding-right: 10%;
+  margin-top: 10%;
+}
+
+.main h2 {
+  padding-top: 0%;
+}
+
+.content {
+  scroll-behavior: smooth;
+  padding-top: 10%;
+  height: 88vh;
+  overflow: auto;
+  grid-column: 2;
+  padding-right: 27%;
+}
+
+.website-description {
+  font-size: 12px;
+  margin-top: 100px;
+  bottom: 1%;
+  position:absolute;
+  opacity:60%;
+} 
+
+.anchors {
+  position:absolute;
+  top:40%;
+  line-height: 1.5;
+}
+
+.link {
+  font-size:30px;
+  text-decoration: none;
+  transition: font-size 0.1s ease, padding-left 0.1s ease;
+}
+
+.link:hover {
+  font-weight: bold;
+}
+
+.link.active {
+  font-weight: bold;
+  padding-left:20px;
+  font-size: 35px;
+}
+
+.socials {
+  bottom: 12%;
+  position: absolute;
+}
+
+.links a{
+  font-size: 30px;
+  margin-right:50px;
+  opacity: 60%;
+}
+
+.links a:hover {
+  opacity:100%;
+}
+
+/*Project section */
+
+.project {
+  position: static;
+  display: grid;
+  grid-template-columns: 60% 40%;
+  padding: 5%;
+}
+
+.description {
+  text-align: left;
+}
+
+.description a {
+  font-size: 20px;
+  text-decoration: none;
+  font-weight: bold;
+  display: inline-block;
+  position: relative;
+}
+
+.description a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0px;
+  width: 0;
+  top:30px;
+  height: 4px;
+  background-color: white;  /* Thickness of the underline */
+  transition: width 0.3s ease;   /* Same color as the link */
+  /* Control the speed of the animation */
+}
+
+.description a:hover::after {
+  width: 100%;
+}
+
+.skills-used {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.skills-used p {
+  background-color: rgba(255, 255, 255, 0.155);
+  border-radius: 10px;
+  padding: 5px;
+  margin-right: 10px;
+  color: white;
+  font-weight: bold;
+}
+
+.project:hover {
+  background-color: rgba(255, 255, 255, 0.156);
+  border-radius: 5px;
+}
+
+.image {
+  text-align: right;
+}
+
+.image img {
+  width: 200px;
+  height: auto;
+  outline: 3px solid rgba(255, 255, 255, 0.155);
 }
