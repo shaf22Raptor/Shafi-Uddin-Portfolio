@@ -65,7 +65,6 @@ const About = ({activeLink}) => (
 const Shortcuts = () => (
   <section className="shortcuts">
     <div className="shortcuts">
-      <Link to="/projects">Projects</Link>
     </div>
   </section>
 );

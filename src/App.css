@@ -135,17 +135,31 @@ a {
 
 .socials {
   bottom: 12%;
-  position: absolute;
+  position: absolute; 
+}
+
+.links {
+  display: flex;
+  flex-direction: center;
 }
 
 .links a{
   font-size: 30px;
   margin-right:50px;
   opacity: 60%;
+  display: flex; /* Flexbox for individual link */
+  flex-direction: column; /* Stack icon and text vertically */
+  align-items: center; /* Center align icon and text */
+  text-decoration: none; /* Remove underline from links */
 }
 
 .links a:hover {
   opacity:100%;
+}
+
+.links p {
+  font-size: 10px;
+  text-decoration: none;
 }
 
 /*Project section */
