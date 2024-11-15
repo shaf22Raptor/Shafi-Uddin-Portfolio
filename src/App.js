@@ -5,7 +5,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // import pages
 import Home from './pages/Home';
-import Contact from './components/HomeComponents/Contact';
 import Projects from './pages/Projects';
 import Maintenance from './pages/Maintenance';
 
@@ -20,7 +19,6 @@ function App() {
             {/* Define routes of website here */}
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/contact" element={<Contact />} />
               <Route path="/projects" element={<Projects />} />
               <Route path="/maintenance" element={<Maintenance />} />
             </Routes>

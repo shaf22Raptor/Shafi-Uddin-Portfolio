@@ -15,11 +15,11 @@ export default function Skills({activeLink}) {
     'Node',
     'C#',
     'C',
-    'C++',
     'Git',
     'mySQL',
     'PostgreSQL',
-    'AWS'
+    'AWS',
+    'Docker'
   ]
   return (
     <section className="skills" id="skills">
