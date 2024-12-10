@@ -1,3 +1,9 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%; /* Ensures the height matches the viewport */
+  overflow: hidden; /* Prevents accidental scrolling */
+}
 /*Home page */
 
 body {
@@ -96,8 +102,14 @@ a {
 }
 
 .main {
+  position: absolute;
   padding-right: 10%;
   margin-top: 10%;
+  height:100%;
+}
+
+.main-content {
+  height:80%;
 }
 
 .main h2 {
@@ -116,9 +128,8 @@ a {
 
 .website-description {
   font-size: 12px;
-  margin-top:10%;
-  bottom: 1%;
   opacity:60%;
+  top:30%;
 } 
 
 .anchors {
@@ -144,8 +155,7 @@ a {
 }
 
 .socials {
-  margin-top: 55%;
-  position: relative; 
+  margin-top: 40%;
 }
 
 .links {
