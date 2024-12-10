@@ -8,7 +8,7 @@ export default class Project extends React.Component {
             <div className='project'>
                 <div className='description'>
                     <a href="https://www.google.com/search?q=hello&sourceid=chrome&ie=UTF-8">{project.title}</a>
-                    <p>{project.description}</p>
+                    <p style={{ textAlign: "justify" }}>{project.description}</p>
                     <div className='skills-used'>
                         {project.languages.map((language, index) => (
                             <p key={index}>{language}</p>

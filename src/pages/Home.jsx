@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import Socials from '../components/HomeComponents/Socials';
@@ -10,20 +10,44 @@ import AnchorMonitor from "../components/AnchorMonitor";
 import Description from "../components/HomeComponents/Description";
 
 export default function Home() {
+  const [smallScreen, setSmallScreen] = useState(window.innerWidth < 768);
   const activeLink = AnchorMonitor();
+
+  useEffect(() => {
+    const handleResize = () => {
+      setSmallScreen(window.innerWidth < 768);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
-      <div className="home_container">
-        <div className="main">
-          <Main activeLink={activeLink}/>
-        </div>
-        <div className="content">
-          <About />
-          <Skills />
-          <ProjectsSample />
-          <Shortcuts />
-        </div>
-      </div>
-  );
+    <div className="home_container">
+      {smallScreen ? (
+        <>
+          <div className="content">
+            <MaintenanceButton />
+            <About />
+            <Skills />
+            <ProjectsSample />
+            <Socials />
+            <Description />
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="main">
+            <Main activeLink={activeLink}/>
+          </div>
+          <div className="content">
+            <About />
+            <Skills />
+            <ProjectsSample />
+          </div>
+        </>
+      )}
+    </div>
+);
 }
 
 const Anchors = ({ activeLink }) => (
@@ -40,31 +64,26 @@ const Main = ({ activeLink }) => (
   <section className="main" id="main">
     <div className="main-content">
       <MaintenanceButton />
-      <Anchors activeLink={activeLink}/>
-      <Description />
+      <Anchors activeLink={activeLink} />
       <Socials />
+      <Description />
     </div>
   </section>
 );
 
-const About = ({activeLink}) => (
+const About = ({ activeLink }) => (
   <section className="about" id="about">
     <div className="about-content">
-      <Header text = "About me" activeLink={activeLink}/>
-      <p>
-        I am a dedicated software engineering student with a passion for solving complex problems through code.
-        Currently pursuing a <b>Computer and Software Systems Engineering degree</b> at <b>The Queensland University of Technology</b>,I am proficient in several programming languages,
-        such as <b>C#</b>, <b>Java</b>, and <b>Python</b>. I am very eager to apply my knowledge to real-world projects.
-        <br /><br />
-        Hello
-      </p>
-    </div>
-  </section>
-);
+      <Header text="About me" activeLink={activeLink} />
+      <p style={{ textAlign: "justify" }}>
+        I am a passionate software engineering student, deeply committed to solving complex challenges through
+        innovative solutions. Currently pursuing a <b>Computer and Software Systems Engineering</b> degree at <b>The Queensland University of Technology</b>, I have developed proficiency in a diverse range of programming
+        languages and frameworks, including <b>Java</b> and <b>React</b>. <br></br><br></br>
 
-const Shortcuts = () => (
-  <section className="shortcuts">
-    <div className="shortcuts">
+        My interests also extend to cloud computing, particularly  <b>Amazon Web Services (AWS)</b>, where I am currently working on developing a video streaming and sharing platform
+        using AWS infrastructure and serverless components. I constantly strive to create impactful, efficient,
+        maintainable, and scalable software solutions.
+      </p>
     </div>
   </section>
 );

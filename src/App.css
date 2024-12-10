@@ -20,8 +20,9 @@ a {
 }
 
 .main-header {
-  position: absolute;
-  top:15%;
+  position: relative;
+  margin-top:18%;
+
 }
 
 .headers {
@@ -62,6 +63,13 @@ a {
   display: grid;
   grid-template-columns: 35% 65%;
   margin-left: 17%;
+}
+
+/* Responsive Layout for Narrow Screens */
+@media screen and (max-width: 600px) {
+  .home_container {
+    flex-direction: column;
+  }
 }
 
 .skills-list {
@@ -105,15 +113,14 @@ a {
 
 .website-description {
   font-size: 12px;
-  margin-top: 100px;
+  margin-top:10%;
   bottom: 1%;
-  position:absolute;
   opacity:60%;
 } 
 
 .anchors {
-  position:absolute;
-  top:40%;
+  position:relative;
+  margin-top:20%;
   line-height: 1.5;
 }
 
@@ -134,8 +141,8 @@ a {
 }
 
 .socials {
-  bottom: 12%;
-  position: absolute; 
+  margin-top: 55%;
+  position: relative; 
 }
 
 .links {
@@ -210,6 +217,7 @@ a {
   border-radius: 10px;
   padding: 5px;
   margin-right: 10px;
+  margin-bottom:1px;
   color: white;
   font-weight: bold;
 }

@@ -5,8 +5,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // import pages
 import Home from './pages/Home';
-import Projects from './pages/Projects';
-import Maintenance from './pages/Maintenance';
 
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
@@ -19,8 +17,6 @@ function App() {
             {/* Define routes of website here */}
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/projects" element={<Projects />} />
-              <Route path="/maintenance" element={<Maintenance />} />
             </Routes>
             <div className="gradient-bg">
           <svg xmlns="http://www.w3.org/2000/svg">

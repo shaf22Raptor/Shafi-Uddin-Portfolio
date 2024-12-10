@@ -5,7 +5,6 @@ import Header from './Header';
 export default function Skills({activeLink}) {
   const skills = [
     'Java',
-    'JavaFX',
     'Javascript',
     'React',
     'HTML',
