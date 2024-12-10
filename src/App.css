@@ -61,14 +61,16 @@ a {
   text-align: left;
   justify-content: left;
   display: grid;
-  grid-template-columns: 35% 65%;
   margin-left: 17%;
 }
 
-/* Responsive Layout for Narrow Screens */
-@media screen and (max-width: 600px) {
+@media (min-width: 768px) {
   .home_container {
-    flex-direction: column;
+    grid-template-columns: 35% 65%;
+  }
+
+  .project {
+    grid-template-columns: 60% 40%;
   }
 }
 
@@ -109,6 +111,7 @@ a {
   overflow: auto;
   grid-column: 2;
   padding-right: 27%;
+  padding-left:10%;
 }
 
 .website-description {
@@ -174,8 +177,7 @@ a {
 .project {
   position: static;
   display: grid;
-  grid-template-columns: 60% 40%;
-  padding: 5%;
+  margin-bottom:10%;
 }
 
 .description {
@@ -224,10 +226,12 @@ a {
 
 .project:hover {
   background-color: rgba(255, 255, 255, 0.156);
+  box-shadow: 0 0 20px 30px rgba(255, 255, 255, 0.156);
   border-radius: 5px;
 }
 
 .image {
+  margin-left:10%;
   text-align: right;
 }
 

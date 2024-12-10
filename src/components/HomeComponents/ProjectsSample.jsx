@@ -5,8 +5,10 @@ import Project from '../Project';
 import placeHolderImage from '../../assets/placeholderImage.jpg';
 import Header from './Header';
 
-export default function ProjectsSample() {
+export default function ProjectsSample(screenSize) {
   const [projects, setProjects] = useState([]);
+
+  console.log("Actual Screen Size in ProjectsSample:", screenSize);
 
   useEffect(() => {
     createProjects();
@@ -24,16 +26,16 @@ export default function ProjectsSample() {
     setProjects(projects);
   }
   return (
-    <Projects projects={projects} />
+    <Projects projects={projects} screenSize={screenSize} />
   )
 }
 
-const Projects = ({ projects }) => (
+const Projects = ({ projects, screenSize }) => (
   <section className="projects" id="projects">
     <div className="projects-content">
       <Header text ="Projects" />
       {projects.map((project, index) => (
-        <Project key={index} project={project} />
+        <Project key={index} project={project} screenSize={screenSize} />
       ))}
     </div>
   </section>

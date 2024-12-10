@@ -18,7 +18,7 @@ function AnchorMonitor() {
                 const sectionBottom = rect.bottom - containerRect.top + container.scrollTop;
 
                 // Check if section is in view
-                if (container.scrollTop + 50 >= sectionTop && container.scrollTop + 50 < sectionBottom) {
+                if (container.scrollTop + 100 >= sectionTop && container.scrollTop + 100 < sectionBottom) {
                     newActiveLink = section.id;
                 }
 

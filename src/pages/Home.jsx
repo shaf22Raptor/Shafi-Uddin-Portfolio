@@ -10,26 +10,49 @@ import AnchorMonitor from "../components/AnchorMonitor";
 import Description from "../components/HomeComponents/Description";
 
 export default function Home() {
-  const [smallScreen, setSmallScreen] = useState(window.innerWidth < 768);
+  const [screenSize, setScreenSize] = useState(() => {
+    if (typeof window !== "undefined") {
+      const width = window.innerWidth;
+      return {
+        mobile: width < 768,
+        small: width < 850,
+        medium: width< 1550,
+      };
+    }
+    return { mobile: false, small: false, medium: false};
+  });
+
   const activeLink = AnchorMonitor();
 
   useEffect(() => {
     const handleResize = () => {
-      setSmallScreen(window.innerWidth < 768);
+      const width = window.innerWidth;
+      console.log("Viewport Width:", width);
+      setScreenSize({
+        mobile: width < 768,
+        small: width < 850,
+        medium: width < 1550,
+        medium_large: width <1600
+      });
     };
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+
+    const debounceResize = debounce(handleResize, 150);
+
+    window.addEventListener("resize", debounceResize);
+    return () => window.removeEventListener("resize", debounceResize);
   }, []);
+
+  console.log("Current screen size is", screenSize);
 
   return (
     <div className="home_container">
-      {smallScreen ? (
+      {screenSize.mobile ? (
         <>
           <div className="content">
-            <MaintenanceButton />
-            <About />
+            <MaintenanceButton screenSize={screenSize}/>
+            <About screenSize={"mobile"}/>
             <Skills />
-            <ProjectsSample />
+            <ProjectsSample screenSize={"medium"}/>
             <Socials />
             <Description />
           </div>
@@ -37,7 +60,7 @@ export default function Home() {
       ) : (
         <>
           <div className="main">
-            <Main activeLink={activeLink}/>
+            <Main activeLink={activeLink} screenSize={screenSize}/>
           </div>
           <div className="content">
             <About />
@@ -71,7 +94,7 @@ const Main = ({ activeLink }) => (
   </section>
 );
 
-const About = ({ activeLink }) => (
+const About = ({ activeLink, screenSize }) => (
   <section className="about" id="about">
     <div className="about-content">
       <Header text="About me" activeLink={activeLink} />
@@ -87,3 +110,12 @@ const About = ({ activeLink }) => (
     </div>
   </section>
 );
+
+function debounce(func, wait) {
+  let timeout;
+  return (...args) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func(...args), wait);
+  };
+}
+
