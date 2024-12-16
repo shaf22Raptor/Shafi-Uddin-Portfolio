@@ -13,8 +13,9 @@ export default function Home() {
   const [screenSize, setScreenSize] = useState(() => {
     if (typeof window !== "undefined") {
       const width = window.innerWidth;
+      const height = window.innerHeight;
       return {
-        mobile: width < 768,
+        mobile: width < 768 || height < 500,
         small: width < 850,
         medium: width< 1550,
       };
@@ -27,9 +28,10 @@ export default function Home() {
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth;
+      const height = window.innerHeight;
       console.log("Viewport Width:", width);
       setScreenSize({
-        mobile: width < 768,
+        mobile: width < 768 || height < 500,
         small: width < 850,
         medium: width < 1550,
         medium_large: width <1600
