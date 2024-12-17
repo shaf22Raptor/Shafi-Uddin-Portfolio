@@ -18,7 +18,8 @@ export default function Skills({activeLink}) {
     'mySQL',
     'PostgreSQL',
     'AWS',
-    'Docker'
+    'Docker',
+    'Cloudflare'
   ]
   return (
     <section className="skills" id="skills">

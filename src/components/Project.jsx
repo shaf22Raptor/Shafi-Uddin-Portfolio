@@ -4,7 +4,6 @@ import ProjectClass from './ProjectClass';
 export default class Project extends React.Component {
     render() {
         const { project, screenSize } = this.props;
-        console.log("Screen Size in Projects:", screenSize);
         return (
             <div className='record'>
                 {screenSize.screenSize == "medium" ? (

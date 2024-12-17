@@ -8,6 +8,12 @@ body {
   cursor: default;
 }
 
+body::-webkit-scrollbar {
+  width: 0; /* Set the width of the scrollbar to 0 for Webkit browsers */
+  height: 0; 
+  display: none; /* Hides the scrollbar */
+}
+
 body p {
   opacity: 90%;
 }
@@ -16,7 +22,7 @@ a {
   color: white;
 }
 
-@media (min-width: 768px) and (min-height: 500px){
+@media (min-width: 1050px) and (min-height: 500px){
 
   .main {
     padding-right: 10%;
@@ -145,7 +151,7 @@ a {
 
 .content {
   scroll-behavior: smooth;
-  padding-top: 10%;
+  margin-top: 10%;
   height: 88vh;
   overflow: auto;
   grid-column: 2;

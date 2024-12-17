@@ -15,7 +15,7 @@ export default function Home() {
       const width = window.innerWidth;
       const height = window.innerHeight;
       return {
-        mobile: width < 768 || height < 500,
+        mobile: width < 1050 || height < 500,
         small: width < 850,
         medium: width< 1550,
       };
@@ -29,9 +29,8 @@ export default function Home() {
     const handleResize = () => {
       const width = window.innerWidth;
       const height = window.innerHeight;
-      console.log("Viewport Width:", width);
       setScreenSize({
-        mobile: width < 768 || height < 500,
+        mobile: width < 1050 || height < 500,
         small: width < 850,
         medium: width < 1550,
         medium_large: width <1600
@@ -43,8 +42,6 @@ export default function Home() {
     window.addEventListener("resize", debounceResize);
     return () => window.removeEventListener("resize", debounceResize);
   }, []);
-
-  console.log("Current screen size is", screenSize);
 
   return (
     <div className="home_container">

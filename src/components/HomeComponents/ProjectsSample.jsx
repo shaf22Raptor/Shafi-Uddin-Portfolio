@@ -8,8 +8,6 @@ import Header from './Header';
 export default function ProjectsSample(screenSize) {
   const [projects, setProjects] = useState([]);
 
-  console.log("Actual Screen Size in ProjectsSample:", screenSize);
-
   useEffect(() => {
     createProjects();
   }, []);
@@ -22,10 +20,15 @@ export default function ProjectsSample(screenSize) {
     const project2Description = `A full stack web service designed to use an API designed to serve data relating to the world's
     volcanoes to a react app. Data is stored on MySQL service, and a node server is designed to facilitate communication between
     the react app and the MySQL service.`
+
+    const project3Description = `A full stack desktop app based on an assignment I completed in first year. Initially a command
+    line application, I am now revamping it with all the skills I have learnt over the years. When finished, it will include a working GUI,
+    and a backend service where data is stored using PostgreSQL.`
+
     const projects = [
       new ProjectClass('Video Streaming using AWS', project1Description, 'link1', placeHolderImage, ['REACT', 'AWS EC2','AWS S3','AWS Route53', 'AWS ALB', 'AWS RDS with mySQL', 'AWS LAMBDA ','AWS API Gateway'], 'place holder image'),
       new ProjectClass("Volcanoes of the World API", project2Description, 'link2', placeHolderImage, ['REACT', 'Node', 'MySQL'], 'place holder image'),
-      new ProjectClass('title2', 'description2', 'link2', placeHolderImage, ['language21,language22'], 'place holder image'),
+      new ProjectClass("C# Auction House [In Progress]", project3Description, 'link2', placeHolderImage, ['C#', 'MySQL'], 'place holder image'),
     ]
     setProjects(projects);
   }

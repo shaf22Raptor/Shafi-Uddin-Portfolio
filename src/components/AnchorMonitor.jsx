@@ -1,56 +1,59 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 function AnchorMonitor() {
     const [activeLink, setActiveLink] = useState('');
+    const [forceUpdate, setForceUpdate] = useState(0);
 
     const handleScroll = (container) => {
         const sections = container.querySelectorAll('section');
-        let newActiveLink = '';
+        let closestSection = null;
+        let closestDistance = Infinity;
 
-        if (container.scrollTop === 0) {
-            // Set the active section as the first section
-            setActiveLink('about');
-        } else {
-            sections.forEach((section) => {
-                const rect = section.getBoundingClientRect();
-                const containerRect = container.getBoundingClientRect();
-                const sectionTop = rect.top - containerRect.top + container.scrollTop;
-                const sectionBottom = rect.bottom - containerRect.top + container.scrollTop;
+        sections.forEach((section) => {
+            const rect = section.getBoundingClientRect();
+            const containerRect = container.getBoundingClientRect();
+            const sectionTop = rect.top - containerRect.top + container.scrollTop;
 
-                // Check if section is in view
-                if (container.scrollTop + 100 >= sectionTop && container.scrollTop + 100 < sectionBottom) {
-                    newActiveLink = section.id;
-                }
+            // Calculate distance of the section's top to the container's scroll position
+            const distanceToTop = Math.abs(container.scrollTop - sectionTop);
 
-            });
-            if (newActiveLink !== '') {
-                if (newActiveLink !== activeLink) {
-                    setActiveLink(newActiveLink);
-                }
+            // Track the section closest to the top of the container
+            if (distanceToTop < closestDistance) {
+                closestDistance = distanceToTop;
+                closestSection = section.id;
             }
+        });
 
+        // Update the active section if it has changed
+        if (closestSection && closestSection !== activeLink) {
+            setActiveLink(closestSection);
+        }
+    };
+
+    useEffect(() => {
+        const container = document.querySelector('.content'); // Target your specific scrollable container
+        console.log(activeLink);
+
+        if (!container) {
+            return;
+        }
+
+        const onScroll = () => handleScroll(container);
+
+        container.addEventListener('scroll', onScroll);
+
+        const handleResize = () => setForceUpdate((prev) => prev + 1);
+        window.addEventListener('resize', handleResize);
+
+        handleScroll(container); // Call once on mount to set initial state
+
+        return () => {
+            container.removeEventListener('scroll', onScroll);
+            window.removeEventListener('resize', handleResize);
         };
-    }
+    }, [activeLink, forceUpdate]); // Add activeLink to dependencies to handle changes
 
-        useEffect(() => {
-            const container = document.querySelector('.content'); // Target your specific scrollable container
+    return activeLink;
+}
 
-            if (!container) {
-                return;
-            }
-
-            const onScroll = () => handleScroll(container);
-
-            container.addEventListener('scroll', onScroll);
-
-            handleScroll(container); // Call once on mount to set initial state
-
-            return () => {
-                container.removeEventListener('scroll', onScroll);
-            };
-        }, [activeLink]); // Add activeLink to dependencies to handle changes
-
-        return activeLink;
-    }
-
-    export default AnchorMonitor;
+export default AnchorMonitor;
