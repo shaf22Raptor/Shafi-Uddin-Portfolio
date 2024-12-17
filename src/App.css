@@ -27,6 +27,10 @@ a {
     margin-left: 17%;
   }
 
+  .headers {
+    font-size: 60px !important;
+  }
+
   .content {
     padding-right: 27% !important;
   }
@@ -54,6 +58,11 @@ a {
   .project {
     grid-template-columns: 60% 40%;
   }
+
+  .image {
+    margin-left:10%;
+    text-align: right;
+  }
 }
 
 .header{
@@ -64,7 +73,7 @@ a {
 
 .headers {
   font-family: "Helvetica";
-  font-size: 60px;
+  font-size: 40px;
   letter-spacing: 0.1px;
   word-spacing: 2px;
   color: #def3fc;
@@ -253,8 +262,8 @@ a {
 }
 
 .image {
-  margin-left:10%;
-  text-align: right;
+  margin-top:5%;
+  margin-bottom: 5%;
 }
 
 .image img {

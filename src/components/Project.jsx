@@ -11,7 +11,10 @@ export default class Project extends React.Component {
                     <div className='project'>
                         <div className='description'>
                             <a href="https://www.google.com/search?q=hello&sourceid=chrome&ie=UTF-8">{project.title}</a>
-                            <div className='image'>
+                            <div className='image' style={{
+                                display: "flex",
+                                justifyContent: "left"
+                            }}>
                                 <img src={project.previewImage} alt={project.imagePlaceHolder} />
                             </div>
                             <p style={{ textAlign: "left" }}>{project.description}</p>
