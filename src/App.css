@@ -151,7 +151,7 @@ a {
 
 .content {
   scroll-behavior: smooth;
-  margin-top: 10%;
+  padding-top: 10%;
   height: 88vh;
   overflow: auto;
   grid-column: 2;
