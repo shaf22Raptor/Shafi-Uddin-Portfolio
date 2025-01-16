@@ -54,6 +54,7 @@ export default function Home() {
             <section id="projects" className="projects">
               <ProjectsSample />
             </section>
+            <DynamicSpacer />
           </div>
         </>
       )}
@@ -61,6 +62,23 @@ export default function Home() {
   );
 }
 
+const DynamicSpacer = () => {
+  const [spacerHeight, setSpacerHeight] = useState(0);
+  useEffect(() => {
+    const calculateSpacerHeight = () => {
+      const screenHeight = window.innerHeight;
+      const dynamicHeight = Math.max(0, (screenHeight - 700) * 0.5);
+      setSpacerHeight(dynamicHeight);
+    };
+
+    calculateSpacerHeight();
+    
+    window.addEventListener('resize', calculateSpacerHeight);
+    return () => window.removeEventListener('resize', calculateSpacerHeight);
+  }, []);
+
+  return <div style={{ height: `${spacerHeight}px` }}></div>;
+};
 
 const Anchors = () => {
   const [activeSection, setActiveSection] = useState('');
@@ -92,8 +110,6 @@ const Anchors = () => {
             }
           }
         }}
-      //onUpdate={(el) => setActiveSection(el ? el.id : '')}
-      //onUpdate={(el) => console.log('Active section:', el && el.id)}
 
       >
         <a href="#about" className={`link ${activeSection === 'about' ? 'active' : ''}`}>About</a><br />
