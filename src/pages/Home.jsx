@@ -1,4 +1,6 @@
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect, useRef } from "react";
+import Scrollspy from 'react-scrollspy';
+import { useCallback } from "react";
 import { Link } from "react-router-dom";
 
 import Socials from '../components/HomeComponents/Socials';
@@ -6,7 +8,7 @@ import Skills from '../components/HomeComponents/Skills';
 import ProjectsSample from '../components/HomeComponents/ProjectsSample';
 import MaintenanceButton from "../components/HomeComponents/MaintenanceButton";
 import Header from "../components/HomeComponents/Header";
-import AnchorMonitor from "../components/AnchorMonitor";
+//import AnchorMonitor from "../components/AnchorMonitor";
 import Description from "../components/HomeComponents/Description";
 
 export default function Home() {
@@ -17,41 +19,45 @@ export default function Home() {
       return {
         mobile: width < 1050 || height < 500,
         small: width < 850,
-        medium: width< 1550,
+        medium: width < 1550,
       };
     }
-    return { mobile: false, small: false, medium: false};
+    return { mobile: false, small: false, medium: false };
   });
-
-  const activeLink = AnchorMonitor();
+  const [forceUpdate, setForceUpdate] = useState(0);  // ✅ Force re-render on resize
 
   useEffect(() => {
-    const handleResize = () => {
+    if (typeof window === "undefined") return;
+
+    const handleResize = debounce(() => {
       const width = window.innerWidth;
       const height = window.innerHeight;
+
       setScreenSize({
         mobile: width < 1050 || height < 500,
         small: width < 850,
         medium: width < 1550,
-        medium_large: width <1600
+        medium_large: width < 1600
       });
-    };
 
-    const debounceResize = debounce(handleResize, 150);
+      setForceUpdate((prev) => prev + 1);  // ✅ Force update to trigger re-render
+    }, 150);
 
-    window.addEventListener("resize", debounceResize);
-    return () => window.removeEventListener("resize", debounceResize);
-  }, []);
+    window.addEventListener("resize", handleResize);
+    handleResize();  // ✅ Initialize screen size
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, [forceUpdate]);
 
   return (
     <div className="home_container">
       {screenSize.mobile ? (
         <>
           <div className="content">
-            <MaintenanceButton screenSize={screenSize}/>
-            <About screenSize={"mobile"}/>
+            <MaintenanceButton screenSize={screenSize} />
+            <About screenSize={"mobile"} />
             <Skills />
-            <ProjectsSample screenSize={"medium"}/>
+            <ProjectsSample screenSize={"medium"} />
             <Socials />
             <Description />
           </div>
@@ -59,43 +65,73 @@ export default function Home() {
       ) : (
         <>
           <div className="main">
-            <Main activeLink={activeLink} screenSize={screenSize}/>
+            <Main screenSize={screenSize} />
           </div>
           <div className="content">
             <About />
-            <Skills />
-            <ProjectsSample />
+            <section id="skills" className="skills">
+              <Skills />
+            </section>
+            <section id="projects" className="projects">
+              <ProjectsSample />
+            </section>
           </div>
         </>
       )}
     </div>
-);
+  );
 }
 
-const Anchors = ({ activeLink }) => (
-  <section className="anchors">
-    <div className="anchors">
-      <a href="#about" className={`link ${activeLink === 'about' ? 'active' : ''}`}>About</a><br />
-      <a href="#skills" className={`link ${activeLink === 'skills' ? 'active' : ''}`}>Skills</a><br />
-      <a href="#projects" className={`link ${activeLink === 'projects' ? 'active' : ''}`}>Projects</a>
-    </div>
-  </section>
-);
 
-const Main = ({ activeLink }) => (
+const Anchors = () => {
+  const [activeSection, setActiveSection] = useState('');
+
+  return (
+    <section className="anchors">
+      <Scrollspy
+        items={['about', 'skills', 'projects']}
+        currentClassName="active"
+        rootEl=".content"
+        onUpdate={(el) => {
+          document.querySelectorAll('.link').forEach(link => {
+            link.classList.remove('active');
+          });
+
+          if (el && el.id) {
+            const activeLink = document.querySelector(`a[href="#${el.id}"]`);
+            if (activeLink) {
+              activeLink.classList.add('active');
+            }
+          }
+        }}
+      //onUpdate={(el) => setActiveSection(el ? el.id : '')}
+      //onUpdate={(el) => console.log('Active section:', el && el.id)}
+
+      >
+        <a href="#about" className={`link ${activeSection === 'about' ? 'active' : ''}`}>About</a><br />
+        <a href="#skills" className={`link ${activeSection === 'skills' ? 'active' : ''}`}>Skills</a><br />
+        <a href="#projects" className={`link ${activeSection === 'projects' ? 'active' : ''}`}>Projects</a>
+      </Scrollspy>
+    </section>
+  );
+};
+
+const Main = () => (
   <section className="main" id="main">
     <div className="main-content">
       <MaintenanceButton />
-      <Anchors activeLink={activeLink} />
-      <Socials />
-      <Description />
+      <Anchors />
+      <div className="bottom-desc">
+        <Socials />
+        <Description />
+      </div>
     </div>
   </section>
 );
 
 const About = ({ activeLink, screenSize }) => (
   <section className="about" id="about">
-    <div className="about-content">
+    <div className="about-content" style={{ top: "1000%" }}>
       <Header text="About me" activeLink={activeLink} />
       <p style={{ textAlign: "justify" }}>
         I am a passionate software engineering student, deeply committed to solving complex challenges through

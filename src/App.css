@@ -31,6 +31,7 @@ a {
   .home_container {
     grid-template-columns: 35% 65%;
     margin-left: 17%;
+    grid-template-rows: 1fr auto;
   }
 
   .headers {
@@ -51,15 +52,20 @@ a {
     top:35%;
   }
 
-  .socials {
-    top:80%;
+  .bottom-desc {
+    bottom:5%;
+    position: absolute;
+  }
+
+  /* .socials {
+    bottom:25%;
     position: absolute;
   }
 
   .website-description {
     position: absolute;
-    top:90%;
-  }
+    bottom:15%;
+  } */
 
   .project {
     grid-template-columns: 60% 40%;
@@ -110,6 +116,7 @@ a {
 
 .home_container {
   position: absolute;
+  height:100vh;
   text-align: left;
   justify-content: left;
   display: grid;
@@ -142,7 +149,13 @@ a {
 }
 
 .main-content {
-  height:80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  align-items: left; 
+  height: 100vh; 
+  min-height: 300px; /* Ensures a minimum height to avoid the elements being too close on very small screens */
+  padding: 0 20px; /* Optional padding for smaller screens */
 }
 
 .main h2 {
@@ -151,12 +164,12 @@ a {
 
 .content {
   scroll-behavior: smooth;
-  padding-top: 10%;
-  height: 88vh;
+  height:100vh;
+  /* padding-top: 10vh; */
   overflow: auto;
-  grid-column: 2;
   padding-left:10%;
   padding-right:10%;
+
 }
 
 .website-description {

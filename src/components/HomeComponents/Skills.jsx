@@ -22,19 +22,17 @@ export default function Skills({activeLink}) {
     'Cloudflare'
   ]
   return (
-    <section className="skills" id="skills">
       <div className="contact">
-        <Header text="My skills"  activeLink = {activeLink} />
+        <Header text="My skills" />
         <SkillsList skills = {skills}/> 
       </div>
-    </section>
   );
 }
 
 const SkillsList = ({ skills }) => (
-  <section className="skills-list">
+  <div className="skills-list">
   {skills.map((skill, index) => (
     <p key={index}>{skill}</p>
   ))}
-</section>
+</div>
 );
