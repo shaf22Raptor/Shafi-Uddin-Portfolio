@@ -1,7 +1,6 @@
 import { React, useState, useEffect, useRef } from "react";
+import { useMediaQuery } from 'react-responsive';
 import Scrollspy from 'react-scrollspy';
-import { useCallback } from "react";
-import { Link } from "react-router-dom";
 
 import Socials from '../components/HomeComponents/Socials';
 import Skills from '../components/HomeComponents/Skills';
@@ -12,52 +11,18 @@ import Header from "../components/HomeComponents/Header";
 import Description from "../components/HomeComponents/Description";
 
 export default function Home() {
-  const [screenSize, setScreenSize] = useState(() => {
-    if (typeof window !== "undefined") {
-      const width = window.innerWidth;
-      const height = window.innerHeight;
-      return {
-        mobile: width < 1050 || height < 500,
-        small: width < 850,
-        medium: width < 1550,
-      };
-    }
-    return { mobile: false, small: false, medium: false };
-  });
-  const [forceUpdate, setForceUpdate] = useState(0);  // ✅ Force re-render on resize
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    const handleResize = debounce(() => {
-      const width = window.innerWidth;
-      const height = window.innerHeight;
-
-      setScreenSize({
-        mobile: width < 1050 || height < 500,
-        small: width < 850,
-        medium: width < 1550,
-        medium_large: width < 1600
-      });
-
-      setForceUpdate((prev) => prev + 1);  // ✅ Force update to trigger re-render
-    }, 150);
-
-    window.addEventListener("resize", handleResize);
-    handleResize();  // ✅ Initialize screen size
-
-    return () => window.removeEventListener("resize", handleResize);
-  }, [forceUpdate]);
+  const isMobile = useMediaQuery({ maxWidth: 1049 });
+  const layoutKey = isMobile ? "mobile" : "desktop";
 
   return (
-    <div className="home_container">
-      {screenSize.mobile ? (
+    <div className="home_container" key={layoutKey}>
+      {isMobile ? (
         <>
           <div className="content">
-            <MaintenanceButton screenSize={screenSize} />
-            <About screenSize={"mobile"} />
+            <MaintenanceButton />
+            <About/>
             <Skills />
-            <ProjectsSample screenSize={"medium"} />
+            <ProjectsSample/>
             <Socials />
             <Description />
           </div>
@@ -65,7 +30,7 @@ export default function Home() {
       ) : (
         <>
           <div className="main">
-            <Main screenSize={screenSize} />
+            <Main />
           </div>
           <div className="content">
             <About />
@@ -86,12 +51,21 @@ export default function Home() {
 const Anchors = () => {
   const [activeSection, setActiveSection] = useState('');
 
+  useEffect(() => {
+    return () => {
+      // 🔥 Cleanup active classes on unmount
+      document.querySelectorAll('.link').forEach(link => {
+        link.classList.remove('active');
+      });
+    };
+  }, []);
+
   return (
     <section className="anchors">
       <Scrollspy
         items={['about', 'skills', 'projects']}
         currentClassName="active"
-        rootEl=".content"
+        rootEl={document.querySelector('.content') ? ".content" : "body"}
         onUpdate={(el) => {
           document.querySelectorAll('.link').forEach(link => {
             link.classList.remove('active');
@@ -132,7 +106,7 @@ const Main = () => (
 const About = ({ activeLink, screenSize }) => (
   <section className="about" id="about">
     <div className="about-content" style={{ top: "1000%" }}>
-      <Header text="About me" activeLink={activeLink} />
+      <Header text="About me" />
       <p style={{ textAlign: "justify" }}>
         I am a passionate software engineering student, deeply committed to solving complex challenges through
         innovative solutions. Currently pursuing a <b>Computer and Software Systems Engineering</b> degree at <b>The Queensland University of Technology</b>, I have developed proficiency in a diverse range of programming
@@ -145,12 +119,3 @@ const About = ({ activeLink, screenSize }) => (
     </div>
   </section>
 );
-
-function debounce(func, wait) {
-  let timeout;
-  return (...args) => {
-    clearTimeout(timeout);
-    timeout = setTimeout(() => func(...args), wait);
-  };
-}
-

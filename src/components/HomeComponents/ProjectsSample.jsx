@@ -28,14 +28,7 @@ export default function ProjectsSample(screenSize) {
     const projects = [
       new ProjectClass('Video Streaming using AWS', project1Description, 'link1', placeHolderImage, ['REACT', 'AWS EC2','AWS S3','AWS Route53', 'AWS ALB', 'AWS RDS with mySQL', 'AWS LAMBDA ','AWS API Gateway'], 'place holder image'),
       new ProjectClass("Volcanoes of the World API", project2Description, 'link2', placeHolderImage, ['REACT', 'Node', 'MySQL'], 'place holder image'),
-      new ProjectClass("C# Auction House [In Progress]", project3Description, 'link2', placeHolderImage, ['C#', 'MySQL'], 'place holder image'),
-      new ProjectClass("C# Auction House [In Progress]", project3Description, 'link2', placeHolderImage, ['C#', 'MySQL'], 'place holder image'),
-      new ProjectClass("C# Auction House [In Progress]", project3Description, 'link2', placeHolderImage, ['C#', 'MySQL'], 'place holder image'),
-      new ProjectClass("C# Auction House [In Progress]", project3Description, 'link2', placeHolderImage, ['C#', 'MySQL'], 'place holder image'),
-      new ProjectClass("C# Auction House [In Progress]", project3Description, 'link2', placeHolderImage, ['C#', 'MySQL'], 'place holder image'),
-      new ProjectClass("C# Auction House [In Progress]", project3Description, 'link2', placeHolderImage, ['C#', 'MySQL'], 'place holder image'),
-      new ProjectClass("C# Auction House [In Progress]", project3Description, 'link2', placeHolderImage, ['C#', 'MySQL'], 'place holder image'),
-      new ProjectClass("C# Auction House [In Progress]", project3Description, 'link2', placeHolderImage, ['C#', 'MySQL'], 'place holder image'),
+      new ProjectClass("C# Auction House [In Progress]", project3Description, 'link2', placeHolderImage, ['C#', 'MySQL'], 'place holder image')
     ]
     setProjects(projects);
   }
