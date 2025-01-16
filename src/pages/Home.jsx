@@ -10,12 +10,26 @@ import Header from "../components/HomeComponents/Header";
 //import AnchorMonitor from "../components/AnchorMonitor";
 import Description from "../components/HomeComponents/Description";
 
+function useForceRemount() {
+  const [key, setKey] = useState(0);
+
+  useEffect(() => {
+    setKey(prevKey => prevKey + 1);
+  }, []);
+
+  return key;
+}
+
+
 export default function Home() {
   const isMobile = useMediaQuery({ maxWidth: 1049 });
   const layoutKey = isMobile ? "mobile" : "desktop";
+  const remountKey = useForceRemount();
+
+  const key = `${isMobile ? "mobile" : "desktop"}-${remountKey}`;
 
   return (
-    <div className="home_container" key={layoutKey}>
+    <div className="home_container" key={key}>
       {isMobile ? (
         <>
           <div className="content">
@@ -65,7 +79,7 @@ const Anchors = () => {
       <Scrollspy
         items={['about', 'skills', 'projects']}
         currentClassName="active"
-        rootEl={document.querySelector('.content') ? ".content" : "body"}
+        rootEl={typeof window !== "undefined" && document.querySelector('.content') ? ".content" : "body"}
         onUpdate={(el) => {
           document.querySelectorAll('.link').forEach(link => {
             link.classList.remove('active');
